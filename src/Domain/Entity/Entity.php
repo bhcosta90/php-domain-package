@@ -33,12 +33,13 @@ abstract class Entity
             }
         }
 
+
         foreach ($props as $prop => $value) {
             $this->{$prop} = $value;
         }
 
         foreach ($properties as $property) {
-            if (empty($this->{$property['name']})) {
+            if (!isset($this->{$property['name']})) {
                 $this->{$property['name']} = null;
             }
         }
@@ -49,7 +50,7 @@ abstract class Entity
     public function update(array $props)
     {
         foreach ($props as $prop => $value) {
-            if(in_array($prop, $this->fieldsUpdated())){
+            if (in_array($prop, $this->fieldsUpdated())) {
                 $this->{$prop} = $value;
             }
         }

@@ -1,56 +1,69 @@
 <?php
 
-namespace Tests\Unit\Costa\DomainPackage\Domain\Entity\Trait;
+namespace Costa\DomainPackage\Domain\Entity;
 
-use Costa\DomainPackage\Domain\Entity\Entity;
+use Costa\DomainPackage\Domain\Notification\Notification;
+use Costa\DomainPackage\Util\FieldType;
 use Costa\DomainPackage\ValueObject\Uuid;
 use DateTime;
-use Tests\Unit\TestCase;
+use ReflectionClass;
 
-class StubEntity extends Entity
+abstract class Entity
 {
-    public ?Uuid $id;
-    public string $name;
-    public DateTime $createdAt;
+    protected abstract function fieldsUpdated(): array;
 
-    protected function fieldsUpdated(): array
+    protected abstract function validated(): bool;
+
+    private ?Notification $notification = null;
+
+    use Trait\EntityTrait, Trait\MethodsMagicsTrait;
+
+    public function __construct(array $props = [])
     {
-        return [
-            'name'
-        ];
+        $fieldType = new FieldType(new ReflectionClass($this));
+        $properties = $fieldType->getProperties();
+        foreach ($properties as $property) {
+            if (empty($this->{$property['name']})) {
+                if ($property['type'] == Uuid::class) {
+                    $this->{$property['name']} = Uuid::random();
+                }
+                if ($property['type'] == DateTime::class) {
+                    $this->{$property['name']} = new DateTime;
+                }
+            }
+        }
+
+
+        foreach ($props as $prop => $value) {
+            $this->{$prop} = $value;
+        }
+
+        foreach ($properties as $property) {
+            if (!isset($this->{$property['name']})) {
+                $this->{$property['name']} = null;
+            }
+        }
+
+        $this->validated();
     }
 
-    protected function validated(): bool
+    public function update(array $props)
     {
-        return true;
-    }
-}
+        foreach ($props as $prop => $value) {
+            if(in_array($prop, $this->fieldsUpdated())){
+                $this->{$prop} = $value;
+            }
+        }
 
-class EntityTest extends TestCase
-{
-    public function testConstructor()
-    {
-        $obj = new StubEntity([
-            'name' => 'test'
-        ]);
-        $this->assertNotEmpty($obj->id());
-        $this->assertNotEmpty($obj->createdAt());
-        $this->assertEquals('test', $obj->name);
+        $this->validated();
     }
 
-    public function testUpdate()
+    public function getNotification()
     {
-        $obj = new StubEntity([
-            'id' => new Uuid('316d8b18-f2ab-457f-b485-8c5553c094d2'),
-            'name' => 'test'
-        ]);
-        $this->assertEquals('test', $obj->name);
+        if (!$this->notification) {
+            $this->notification = new Notification();
+        }
 
-        $obj->update([
-            'id' => Uuid::random(),
-            'name' => 'oi',
-        ]);
-        $this->assertEquals('316d8b18-f2ab-457f-b485-8c5553c094d2', (string) $obj->id);
-        $this->assertEquals('oi', $obj->name);
+        return $this->notification;
     }
 }
