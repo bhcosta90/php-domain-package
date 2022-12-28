@@ -4,5 +4,5 @@ namespace Costa\DomainPackage\UseCase\Interfaces;
 
 interface EventManagerInterface
 {
-    public function dispatch(object $data): bool;
+    public function dispatch(object $event): void;
 }
