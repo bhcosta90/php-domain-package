@@ -13,6 +13,7 @@ interface EntityRepositoryInterface
     public function findById(string $id): ?Entity;
     public function findAll(): ListInterface;
     public function paginate(
+        object $filter = null,
         int $page = 1,
         int $total = 15
     ): PaginationInterface;
