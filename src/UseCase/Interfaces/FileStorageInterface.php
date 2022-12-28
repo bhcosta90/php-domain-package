@@ -15,5 +15,5 @@ interface FileStorageInterface
      * @param string $path
      * @return bool
      */
-    public function remove(string $path): bool;
+    public function delete(string $path): bool;
 }
