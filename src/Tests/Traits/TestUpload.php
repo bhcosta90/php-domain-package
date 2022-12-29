@@ -9,8 +9,15 @@ use Illuminate\Http\UploadedFile;
 
 trait TestUpload
 {
-    protected function assertInvalidationFile($field, $extension, $maxSize, $rule, $ruleParams = [])
-    {
+    use TestValidation;
+    
+    protected function assertInvalidationFile(
+        string $field,
+        string $extension,
+        ?int $maxSize,
+        string $rule,
+        array $ruleParams = []
+    ) {
         $routes = [
             [
                 'method' => 'POST',
@@ -22,20 +29,23 @@ trait TestUpload
             ],
         ];
 
+        $file = UploadedFile::fake()->create("$field.1$extension");
+
         foreach ($routes as $route) {
-            $file = UploadedFile::fake()->create("$field.1$extension");
             $response = $this->json($route['method'], $route['route'], [
                 $field => $file
             ]);
 
             $this->assertInvalidationFields($response, [$field], $rule, $ruleParams);
 
-            $file = UploadedFile::fake()->create("$field.$extension")->size($maxSize + 1);
-            $response = $this->json($route['method'], $route['route'], [
-                $field => $file
-            ]);
+            if ($maxSize) {
+                $file = UploadedFile::fake()->create("$field.$extension")->size($maxSize + 1);
+                $response = $this->json($route['method'], $route['route'], [
+                    $field => $file
+                ]);
 
-            $this->assertInvalidationFields($response, [$field], 'max.file', ['max' => $maxSize]);
+                $this->assertInvalidationFields($response, [$field], 'max.file', ['max' => $maxSize]);
+            }
         }
     }
 
