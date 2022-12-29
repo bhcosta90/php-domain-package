@@ -6,6 +6,7 @@ namespace Costa\DomainPackage\Tests\Traits;
 
 use Exception;
 use Illuminate\Testing\TestResponse;
+use Costa\DomainPackage\Tests\Traits\Exception\TestSaveException;
 
 trait TestSave
 {
@@ -20,7 +21,7 @@ trait TestSave
         /** @var TestResponse $response */
         $response = $this->json('POST', $this->routeStore(), $sendData);
         if ($response->status() !== 201) {
-            throw new Exception\TestSaveException(
+            throw new TestSaveException(
                 "Response status must be 201, given {$response->status()}:\n{$response->content()}"
             );
         }
@@ -34,7 +35,7 @@ trait TestSave
         /** @var TestResponse $response */
         $response = $this->json('PUT', $this->routeUpdate(), $sendData);
         if ($response->status() !== 200) {
-            throw new Exception\TestSaveException(
+            throw new TestSaveException(
                 "Response status must be 200, given {$response->status()}:\n{$response->content()}"
             );
         }
