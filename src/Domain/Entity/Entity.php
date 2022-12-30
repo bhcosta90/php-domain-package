@@ -2,6 +2,7 @@
 
 namespace Costa\DomainPackage\Domain\Entity;
 
+use Costa\DomainPackage\Domain\Event\EventInterface;
 use Costa\DomainPackage\Domain\Notification\Notification;
 use Costa\DomainPackage\Util\FieldType;
 use Costa\DomainPackage\ValueObject\Uuid;
@@ -15,6 +16,9 @@ abstract class Entity
     protected abstract function validated(): bool;
 
     private ?Notification $notification = null;
+
+    /** @var EventInterface */
+    private array $events = [];
 
     use Trait\EntityTrait, Trait\MethodsMagicsTrait;
 
@@ -65,5 +69,10 @@ abstract class Entity
         }
 
         return $this->notification;
+    }
+
+    public function addEvent(EventInterface $event)
+    {
+        $this->events[] = $event;
     }
 }
