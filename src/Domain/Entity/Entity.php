@@ -32,9 +32,11 @@ abstract class Entity
             if (empty($this->{$property['name']})) {
                 if ($property['type'] == Uuid::class) {
                     $this->{$property['name']} = Uuid::random();
+                    $this->attributes[$property['name']] = $this->{$property['name']};
                 }
                 if ($property['type'] == DateTime::class) {
                     $this->{$property['name']} = new DateTime;
+                    $this->attributes[$property['name']] = $this->{$property['name']};
                 }
             }
         }
