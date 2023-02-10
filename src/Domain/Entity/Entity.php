@@ -11,8 +11,6 @@ use ReflectionClass;
 
 abstract class Entity
 {
-    private $attributes = [];
-
     protected abstract function fieldsUpdated(): array;
 
     protected abstract function validated(): bool;
@@ -50,21 +48,20 @@ abstract class Entity
             }
         }
 
-        $properties = $fieldType->getProperties();
-        foreach ($properties as $property) {
-            $this->attributes[$property['name']] = $this->{$property['name']};
-        }
-
         $this->validated();
-
-        foreach ($properties as $property) {
-            $this->attributes[$property['name']] = $this->{$property['name']};
-        }
     }
 
-    public function getAttributes()
+    public function toArray()
     {
-        return $this->attributes;
+        $data = [];
+        $fieldType = new FieldType(new ReflectionClass($this));
+        $properties = $fieldType->getProperties();
+        foreach ($properties as $property) {
+            if (!is_array($this->{$property['name']})) {
+                $data[$property['name']] = $this->{$property['name']};
+            }
+        }
+        return $data;
     }
 
     public function update(array $props)
