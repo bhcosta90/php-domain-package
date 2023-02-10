@@ -23,7 +23,7 @@ class FieldType
 
             $result[] = [
                 'name' => $props->getName(),
-                'type' => $prop->getType()->getName(),
+                'type' => $prop->getType()?->getName(),
             ];
         }
 
