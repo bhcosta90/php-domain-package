@@ -11,7 +11,7 @@ use ReflectionClass;
 
 abstract class Entity
 {
-    protected $attributes = [];
+    private $attributes = [];
 
     protected abstract function fieldsUpdated(): array;
 
@@ -32,11 +32,9 @@ abstract class Entity
             if (empty($this->{$property['name']})) {
                 if ($property['type'] == Uuid::class) {
                     $this->{$property['name']} = Uuid::random();
-                    $this->attributes[$property['name']] = $this->{$property['name']};
                 }
                 if ($property['type'] == DateTime::class) {
                     $this->{$property['name']} = new DateTime;
-                    $this->attributes[$property['name']] = $this->{$property['name']};
                 }
             }
         }
@@ -44,18 +42,24 @@ abstract class Entity
 
         foreach ($props as $prop => $value) {
             $this->{$prop} = $value;
-            $this->attributes[$prop] = $value;
         }
 
         foreach ($properties as $property) {
             if (!isset($this->{$property['name']})) {
                 $this->{$property['name']} = null;
-                $this->attributes[$property['name']] = null;
             }
         }
 
+        $properties = $fieldType->getProperties();
+        foreach ($properties as $property) {
+            $this->attributes[$property['name']] = $this->{$property['name']};
+        }
 
         $this->validated();
+
+        foreach ($properties as $property) {
+            $this->attributes[$property['name']] = $this->{$property['name']};
+        }
     }
 
     public function getAttributes()
