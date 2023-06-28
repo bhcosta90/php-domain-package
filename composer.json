@@ -1,5 +1,7 @@
 {
     "name": "bhcosta90/clean-architecture",
+    "type": "project",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "BRCas\\CA\\": "src/"
