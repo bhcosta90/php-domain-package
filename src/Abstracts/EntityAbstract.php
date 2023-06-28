@@ -22,13 +22,17 @@ abstract class EntityAbstract
                 $this->{$key} = $value;
             }
         }
+        
+        $this->validated();
     }
 
     public static function from(array $data): static
     {
         $data = self::setAttributes($data);
         $data = self::setAttributeWhenIsEmpty($data);
-        return new static(...$data);
+        $obj = new static(...$data);
+        $obj->validate();
+        return $obj;
     }
 
     public function id(): string
@@ -104,6 +108,11 @@ abstract class EntityAbstract
     protected function fillable(): array
     {
         return [];
+    }
+
+    protected function validated(): void
+    {
+        //
     }
 
     private static function setAttributes(array $data)
