@@ -6,6 +6,7 @@ namespace BRCas\CA\Abstracts;
 
 use BRCas\CA\Support\FieldTypeSupport;
 use BRCas\CA\VO\Uuid;
+use Core\Company\Company\Domain\Company;
 use DateTime;
 use ReflectionClass;
 
@@ -13,7 +14,14 @@ abstract class DataAbstract
 {
     public function update(array $data)
     {
-        self::from($data);
+        $data = self::setAttributes($data);
+        $data = self::setAttributeWhenIsEmpty($data);
+        
+        foreach($data as $key => $value) {
+            if (in_array($key, $this->fillable())) {
+                $this->{$key} = $value;
+            }
+        }
     }
 
     public static function from(array $data): static
@@ -48,12 +56,21 @@ abstract class DataAbstract
 
         foreach (array_keys($properties) as $key) {
             try {
-                if ($properties[$key] === 'bool') {
-                    $value = (bool) $this->{$key};
-                } else {
-                    $value = (!empty($this->{$key}) && method_exists($this->{$key}, '__toString'))
-                    ? $this->{$key}->__toString()
-                        : $this->{$key};
+                switch ($properties[$key]) {
+                    case 'bool':
+                        $value = (bool) $this->{$key};
+                        break;
+                    case 'float':
+                        $value = (float) $this->{$key};
+                        break;
+                    case 'int':
+                        $value = (int)
+                        $this->{$key};
+                        break;
+                    default:
+                        $value = (!empty($this->{$key}) && method_exists($this->{$key}, '__toString'))
+                            ? $this->{$key}->__toString()
+                            : $this->{$key};
                 }
 
                 if ($value instanceof DataAbstract) {
@@ -66,8 +83,10 @@ abstract class DataAbstract
                 throw $e;
             }
         }
-        $data['id'] = $this->id();
-        $data['createdAt'] = $this->createdAt();
+
+        if (get_called_class() == Company::class) {
+            dump($data);
+        }
 
         return $data;
     }
@@ -82,6 +101,11 @@ abstract class DataAbstract
         throw new Exception("Property {$property} not found in class {$className}");
     }
 
+    protected function fillable(): array
+    {
+        return [];
+    }
+
     private static function setAttributes(array $data)
     {
         $fields = (new FieldTypeSupport(new ReflectionClass(get_called_class())))->getProperties();
@@ -89,15 +113,24 @@ abstract class DataAbstract
 
         foreach ($data as $key => $value) {
             if (!empty($value) && array_key_exists($key, $fields)) {
-                if ($fields[$key] === Uuid::class) {
-                    $data[$key] = new Uuid($value);
+                switch ($fields[$key]) {
+                    case Uuid::class:
+                        $readData[$key] = new Uuid($value);
+                        break;
+                    case DateTime::class:
+                        $readData[$key] = new DateTime($value);
+                        break;
+                    case 'float':
+                        $readData[$key] = (float) $value;
+                        break;
+                    case 'bool':
+                        $readData[$key] = (bool) $value;
+                        break;
+                    default:
+                        $readData[$key] = $data[$key] ?? null;
+                        break;
                 }
 
-                if ($fields[$key] === DateTime::class) {
-                    $data[$key] = new DateTime($value);
-                }
-
-                $readData[$key] = $data[$key] ?? null;
             }
         }
 
@@ -110,21 +143,31 @@ abstract class DataAbstract
         $readData = [];
 
         foreach ($fields as $key => $value) {
-            if ($value === Uuid::class && empty($data[$key])) {
-                $data[$key] = Uuid::random();
-            }
-
-            if ($value === DateTime::class && empty($data[$key])) {
-                $data[$key] = new DateTime();
-            }
-
-            if ($value === 'bool' && empty($data[$key])) {
-                $data[$key] = false;
+            if (empty($data[$key])) {
+                switch ($value) {
+                    case Uuid::class:
+                        $data[$key] = Uuid::random();
+                        break;
+                    case DateTime::class:
+                        $data[$key] = new DateTime();
+                        break;
+                    case 'bool':
+                        $data[$key] = false;
+                        break;
+                    case 'float':
+                        $data[$key] = 0;
+                        break;
+                    case 'array':
+                        $data[$key] = [];
+                        break;
+                    default:
+                        break;
+                }
             }
 
             $readData[$key] = $data[$key] ?? null;
         }
 
         return $readData;
-    }
+    }    
 }

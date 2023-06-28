@@ -9,7 +9,7 @@ use Ramsey\Uuid\Uuid as RamseyUuid;
 
 class Uuid
 {
-    public function __construct(protected ?string $id = null)
+    public function __construct(protected string $id)
     {
         $this->ensureIsValid($id);
     }
