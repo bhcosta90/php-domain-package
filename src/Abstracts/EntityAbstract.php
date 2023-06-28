@@ -10,7 +10,7 @@ use Core\Company\Company\Domain\Company;
 use DateTime;
 use ReflectionClass;
 
-abstract class DataAbstract
+abstract class EntityAbstract
 {
     public function update(array $data)
     {
