@@ -1,5 +1,5 @@
 {
-    "name": "bhcosta90/clear-architecture",
+    "name": "bhcosta90/clean-architecture",
     "autoload": {
         "psr-4": {
             "BRCas\\CA\\": "src/"
