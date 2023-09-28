@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace BRCas\CA\Responses;
 
-use BRCas\CA\Interfaces\PaginationInterface;
+use BRCas\CA\Contracts\Items\PaginationInterface;
 
 class PaginationResponse
 {
-    public static function response(PaginationInterface $pagination)
+    public static function response(PaginationInterface $pagination): array
     {
         return [
             'items' => $pagination->items(),
