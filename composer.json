@@ -19,7 +19,6 @@
         }
     ],
     "require": {
-        "rakit/validation": "^1.4",
         "bhcosta90/entity": "^1.0"
     },
     "require-dev": {

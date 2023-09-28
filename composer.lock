@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8e8867dc13ecb412b0e74795b88e7569",
+    "content-hash": "0b79c04e70684ca3a1b07059850f2d9b",
     "packages": [
         {
             "name": "bhcosta90/entity",
