@@ -8,7 +8,7 @@ interface FileStorageInterface
 {
     /**
      * @param string $path
-     * @param array $_FILES[file]
+     * @param array $file
      * @return string
      */
     public function store(string $path, array $file): string;
