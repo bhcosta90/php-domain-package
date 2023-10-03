@@ -6,7 +6,7 @@ namespace BRCas\CA\DTO\Output;
 
 use Costa\Entity\Data;
 
-class Paginate
+class PaginateOutput
 {
     /**
      * @param Data[] $items

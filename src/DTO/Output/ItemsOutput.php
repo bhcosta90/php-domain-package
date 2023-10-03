@@ -6,7 +6,7 @@ namespace BRCas\CA\DTO\Output;
 
 use Costa\Entity\Data;
 
-class Items
+class ItemsOutput
 {
     /**
      * @param Data[] $items
