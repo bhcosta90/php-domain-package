@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace BRCas\CA\UseCases;
+namespace BRCas\CA\DTO\Input;
 
-class OutputDelete
+class Find
 {
     public function __construct(
-        public bool $success,
+        public string $id,
     ) {
         //
     }

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace BRCas\CA\UseCases;
+namespace BRCas\CA\DTO\Output;
 
 use Costa\Entity\Data;
 
-class OutputPaginate
+class Paginate
 {
     /**
      * @param Data[] $items
