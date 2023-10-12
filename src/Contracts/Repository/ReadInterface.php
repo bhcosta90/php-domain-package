@@ -6,11 +6,11 @@ namespace BRCas\CA\Contracts\Repository;
 
 use BRCas\CA\Contracts\Items\ItemInterface;
 use BRCas\CA\Contracts\Items\PaginationInterface;
-use Costa\Entity\Data;
+use Costa\Entity\Interfaces\DataInterface;
 
 interface ReadInterface
 {
-    public function find(string $id, array $with = []): Data;
+    public function find(string $id, array $with = []): DataInterface;
 
     public function items(array $filter = [], array $with = []): ItemInterface;
 
