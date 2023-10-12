@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace BRCas\CA\UseCases;
+namespace BRCas\CA\DTO\Input;
 
-class InputList
+class ListInput
 {
     public function __construct(
         public int $limit,
