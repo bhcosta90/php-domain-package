@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BRCas\CA\ValueObject;
 
-use Costa\Entity\Contracts\ValueObjectInterface;
+use Costa\Entity\Interfaces\ValueObjectInterface;
 use InvalidArgumentException;
 
 class Password implements ValueObjectInterface
@@ -30,12 +30,12 @@ class Password implements ValueObjectInterface
         return (string)$this->hash;
     }
 
-    protected function __construct(string $password)
+    protected function __construct(mixed $value)
     {
-        $this->hash = $password;
+        $this->hash = $value;
 
-        if (password_get_info($password)['algoName'] == 'unknown') {
-            $this->hash = password_hash($password, PASSWORD_DEFAULT);
+        if (password_get_info($value)['algoName'] == 'unknown') {
+            $this->hash = password_hash($value, PASSWORD_DEFAULT);
         }
     }
 }
