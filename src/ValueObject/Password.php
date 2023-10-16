@@ -22,7 +22,7 @@ class Password implements ValueObjectInterface
 
     public function login($password): bool
     {
-        return password_verify($password, $this->password);
+        return password_verify($password, $this->hash);
     }
 
     public function __toString(): string
@@ -30,7 +30,7 @@ class Password implements ValueObjectInterface
         return (string)$this->hash;
     }
 
-    protected function __construct(mixed $value)
+    public function __construct(mixed $value)
     {
         $this->hash = $value;
 
