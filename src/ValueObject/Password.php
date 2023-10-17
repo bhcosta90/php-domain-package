@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace BRCas\CA\ValueObject;
 
-use Costa\Entity\Interfaces\ValueObjectInterface;
+use Costa\Entity\Contracts\ValueObjectInterface;
 use InvalidArgumentException;
 
 class Password implements ValueObjectInterface
