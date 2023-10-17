@@ -24,12 +24,14 @@
     "require-dev": {
         "mockery/mockery": "^1.5",
         "pestphp/pest": "^2.23",
-        "symfony/var-dumper": "^6.3"
+        "symfony/var-dumper": "^6.3",
+        "captainhook/captainhook": "^5.18"
     },
     "scripts": {
         "cover": [
             "vendor/bin/phpunit --coverage-html .phpunit"
-        ]
+        ],
+        "post-autoload-dump": "vendor/bin/captainhook install -f -s"
     },
     "repositories": [
         {
