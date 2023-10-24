@@ -9,8 +9,8 @@ use Costa\Entity\Contracts\EventInterface;
 interface EventManagerInterface
 {
     /**
-     * @param EventInterface[] $event
+     * @param EventInterface[] $events
      * @return void
      */
-    public function dispatch(array $event): void;
+    public function dispatch(array $events): void;
 }
