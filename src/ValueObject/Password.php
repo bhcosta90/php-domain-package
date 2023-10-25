@@ -11,6 +11,15 @@ class Password implements ValueObjectInterface
 {
     public string $hash;
 
+    public function __construct(mixed $value)
+    {
+        $this->hash = $value;
+
+        if (password_get_info($value)['algoName'] == 'unknown') {
+            $this->hash = password_hash($value, PASSWORD_DEFAULT);
+        }
+    }
+
     public static function make(?string $password = null): self
     {
         if (empty($password)) {
@@ -28,14 +37,5 @@ class Password implements ValueObjectInterface
     public function __toString(): string
     {
         return (string)$this->hash;
-    }
-
-    public function __construct(mixed $value)
-    {
-        $this->hash = $value;
-
-        if (password_get_info($value)['algoName'] == 'unknown') {
-            $this->hash = password_hash($value, PASSWORD_DEFAULT);
-        }
     }
 }
