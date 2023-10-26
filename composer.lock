@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26485f742bdb16f59424499bd71005d4",
+    "content-hash": "0039d99191e1507f9fba0956227aec1c",
     "packages": [
         {
             "name": "bhcosta90/entity",
-            "version": "dev-master",
+            "version": "1.0.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bhcosta90/php-entity-package.git",
@@ -31,7 +31,6 @@
                 "pestphp/pest": "^2.19",
                 "symfony/var-dumper": "^6.3"
             },
-            "default-branch": true,
             "type": "project",
             "autoload": {
                 "psr-4": {
@@ -58,7 +57,7 @@
                 }
             ],
             "support": {
-                "source": "https://github.com/bhcosta90/php-entity-package/tree/master",
+                "source": "https://github.com/bhcosta90/php-entity-package/tree/1.0.25",
                 "issues": "https://github.com/bhcosta90/php-entity-package/issues"
             },
             "time": "2023-10-26T17:19:45+00:00"
@@ -4881,9 +4880,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "bhcosta90/entity": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],

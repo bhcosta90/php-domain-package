@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "bhcosta90/entity": "dev-master"
+        "bhcosta90/entity": "^1.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.5",
