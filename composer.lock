@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0039d99191e1507f9fba0956227aec1c",
+    "content-hash": "26485f742bdb16f59424499bd71005d4",
     "packages": [
         {
             "name": "bhcosta90/entity",
-            "version": "1.0.24",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bhcosta90/php-entity-package.git",
-                "reference": "5edccdade9ede6ff06a4b0e04f35fb2a55b436c5"
+                "reference": "54227f3986925aba25cc98f1a8bf42ade6892e7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bhcosta90/php-entity-package/zipball/5edccdade9ede6ff06a4b0e04f35fb2a55b436c5",
-                "reference": "5edccdade9ede6ff06a4b0e04f35fb2a55b436c5",
+                "url": "https://api.github.com/repos/bhcosta90/php-entity-package/zipball/54227f3986925aba25cc98f1a8bf42ade6892e7d",
+                "reference": "54227f3986925aba25cc98f1a8bf42ade6892e7d",
                 "shasum": ""
             },
             "require": {
@@ -31,6 +31,7 @@
                 "pestphp/pest": "^2.19",
                 "symfony/var-dumper": "^6.3"
             },
+            "default-branch": true,
             "type": "project",
             "autoload": {
                 "psr-4": {
@@ -57,10 +58,10 @@
                 }
             ],
             "support": {
-                "source": "https://github.com/bhcosta90/php-entity-package/tree/1.0.24",
+                "source": "https://github.com/bhcosta90/php-entity-package/tree/master",
                 "issues": "https://github.com/bhcosta90/php-entity-package/issues"
             },
-            "time": "2023-10-25T22:38:53+00:00"
+            "time": "2023-10-26T11:44:28+00:00"
         },
         {
             "name": "brick/math",
@@ -4880,7 +4881,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "bhcosta90/entity": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
