@@ -8,5 +8,5 @@ use Closure;
 
 interface DatabaseTransactionInterface
 {
-    public function transaction(Closure $closure): void;
+    public function transaction(Closure $closure): mixed;
 }
