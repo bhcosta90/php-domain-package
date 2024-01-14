@@ -1,49 +1,49 @@
 {
-    "name": "bhcosta90/clean-architecture",
-    "type": "project",
-    "license": "MIT",
-    "minimum-stability": "stable",
-    "prefer-stable": true,
-    "autoload": {
-        "psr-4": {
-            "BRCas\\CA\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Bruno Costa",
-            "email": "bruno.costa@dafiti.com.br"
-        }
-    ],
-    "require": {
-        "bhcosta90/entity": "^1.0"
-    },
-    "require-dev": {
-        "mockery/mockery": "^1.5",
-        "pestphp/pest": "^2.23",
-        "symfony/var-dumper": "^6.3",
-        "captainhook/captainhook": "^5.18"
-    },
-    "scripts": {
-        "cover": [
-            "vendor/bin/phpunit --coverage-html .phpunit"
-        ],
-        "post-autoload-dump": "vendor/bin/captainhook install -f -s"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/bhcosta90/php-entity-package"
-        }
-    ],
-    "config": {
-        "allow-plugins": {
-            "pestphp/pest-plugin": true
-        }
+  "name": "bhcosta90/clean-architecture",
+  "type": "project",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "BRCas\\CA\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Bruno Costa",
+      "email": "bruno.costa@dafiti.com.br"
+    }
+  ],
+  "require": {
+    "bhcosta90/entity": "^1.0"
+  },
+  "require-dev": {
+    "mockery/mockery": "^1.5",
+    "pestphp/pest": "^2.23",
+    "symfony/var-dumper": "^6.3",
+    "captainhook/captainhook": "^5.18"
+  },
+  "scripts": {
+    "cover": [
+      "vendor/bin/phpunit --coverage-html .phpunit"
+    ],
+    "post-autoload-dump": "vendor/bin/captainhook install -f -s"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/bhcosta90/php-entity-package"
+    }
+  ],
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  }
 }

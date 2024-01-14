@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use BRCas\CA\ValueObject\Password;
 use Costa\Entity\Contracts\ValueObjectInterface;
-
 use function PHPUnit\Framework\assertInstanceOf;
 use function PHPUnit\Framework\assertIsString;
 use function PHPUnit\Framework\assertTrue;
