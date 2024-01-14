@@ -14,8 +14,9 @@ class ItemsOutput
      */
     public function __construct(
         public array $items,
-        public int $total,
-    ) {
+        public int   $total,
+    )
+    {
         //
     }
 }
